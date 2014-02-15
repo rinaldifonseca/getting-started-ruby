@@ -4,7 +4,7 @@ describe 'test', :js => true do
   context 'test' do
     it "test" do
       visit '/'
-      page.should have_content("workssss!")
+      page.should have_content("works!")
     end
   end
 end
