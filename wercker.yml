@@ -1,4 +1,4 @@
-box: wercker/ubuntu12.04-ruby2.0.0
+box: sabind/ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox@0.0.14
 build:
     steps:
         - bundle-install
