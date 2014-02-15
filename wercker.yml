@@ -3,6 +3,14 @@ build:
     steps:
         - bundle-install
         - script:
+            name: foo
+            code: |-
+                 echo "foooooooooooooooooooooooooooo" 
+        - script:
+            name: foo
+            code: |-
+                  sudo apt-get install firefox build-essential nodejs libfreetype6-dev libfontconfig1-dev xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
+        - script:
             name: rspec
             code: bundle exec rspec
         - script:
@@ -15,7 +23,3 @@ build:
                   # Give xvfb time to start. 3 seconds is the default for all xvfb-run commands.
                   # sleep 3
                 
-            
-deploy:
-    steps:
-        - heroku-deploy

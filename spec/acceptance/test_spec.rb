@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../acceptance_helper'
 
-describe 'test' do  
+describe 'test', :js => true do  
   context 'test' do
     it "test" do
       visit '/'
