@@ -6,10 +6,13 @@ gem 'json'
 gem 'rake'
 gem 'rack-test'
 
-gem "selenium-webdriver"
-gem "capybara"
-gem "capybara-webkit"
+
 
 group :test do
   gem 'rspec'
+  gem 'capybara'
+  gem "selenium-webdriver"
+  gem "capybara"
+  gem "capybara-webkit"
+  gem "turnip"
 end
