@@ -1,32 +1,21 @@
-name : ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox
-version : 0.0.14
-type : main
-platform : ubuntu@12.04
-packages:
-  - firefox
-keywords:
-  - firefox
-  - ruby@2.0.0
-  - meteorite
-  - cucumber
-  - xvfb
-  - selenium
-  - nodejs@0.10.20
-  - meteor@6.5.1
-  - mongodb
-descripton:
-  I built this box instead of the standard MeteorJS since I needed additional support for Ruby + Cucumber + Xvfb since I don't run my automation through JS.
-script: |
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv C7917B12
-  sudo apt-get update
-  sudo apt-get install firefox build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
-  sleep 5
-
-
-
-env:
-  RUBY_VERSION: "2.0.0"
-  NODE_VERSION: "0.10.20"
-  METEOR_VERSION: "0.6.5.1"
-  DISPLAY: ":99.0"
+box: sabind/ubuntu12.04-nodejs0.10-meteor-ruby2.0.0-firefox@0.0.14
+build:
+    steps:
+        - bundle-install
+        - script:
+            name: rspec
+            code: bundle exec rspec
+        - script:
+                name: Enable virtual display
+                code: |-
+                  # Start xvfb which gives the context an virtual display
+                  # which is required for tests that require an GUI
+                  export DISPLAY=:99.0
+                  start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
+                  # Give xvfb time to start. 3 seconds is the default for all xvfb-run commands.
+                  # sleep 3
+                
+            
+deploy:
+    steps:
+        - heroku-deploy
