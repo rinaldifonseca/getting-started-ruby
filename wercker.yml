@@ -16,18 +16,13 @@ keywords:
   - mongodb
 descripton:
   I built this box instead of the standard MeteorJS since I needed additional support for Ruby + Cucumber + Xvfb since I don't run my automation through JS.
-steps:
-  - bundle-install
-  - script:
-    name: rspec
-    code: bundle exec rspec
 script: |
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv C7917B12
   sudo apt-get update
   sudo apt-get install firefox build-essential nodejs mongodb-10gen curl wget libfreetype6-dev libfontconfig1-dev xvfb x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
-  sudo stop mongodb
   sleep 5
+
 
 
 env:
